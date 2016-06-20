@@ -17,5 +17,6 @@ RUN apk --update add sqlite-libs \
   && gem install mailcatcher \
   && rm -r /root/.gem \
   && find / -name '*.gem' | xargs rm \
-  && apk del  build_deps
+  && apk del  build_deps \
+  && rm -rf /var/cache/apk/*
 
