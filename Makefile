@@ -4,22 +4,22 @@ VERSION?=0.1.0
 
 ### Do not override below
 
-user=legalio
+user=legalio-eng
 app=mailcatcher
 version=$(VERSION)
-#registry=docker.io
+registry=gcr.io
+image=$(registry)/$(user)/$(app)
 
 all: container
 
 container:
-	docker build --tag=$(user)/$(app):$(version) .
-	docker tag $(user)/$(app):$(version) $(user)/$(app):latest
+	gcloud docker build --tag=$(image):$(version) --tag=$(image):latest .
 
 push:
-	docker push $(user)/$(app):$(version)
+	gcloud docker -- push $(image):$(version)
 
 push-latest:
-	docker push $(user)/$(app):latest
+	docker push -- $(image):latest
 
 push-all: push push-latest
 
